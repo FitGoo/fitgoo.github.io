@@ -3,44 +3,421 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FitGo</title>
+  <title>FitGo - Delivery saludable</title>
   <style>
-    body {margin:0; font-family: Arial; background:#f5f5f5;}
-    header {background:#00b894; color:white; padding:15px; display:flex; justify-content:space-between;}
-    nav a {color:white; margin:0 10px; text-decoration:none;}
-    .hero {padding:40px; text-align:center;}
-    .btn {background:#00b894; color:white; padding:12px 20px; border:none; border-radius:8px;}
-    .menu {display:flex; flex-wrap:wrap; justify-content:center;}
-    .card {background:white; width:250px; margin:10px; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7f6;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(135deg, #00b894, #019875);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 28px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+                  url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1400&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      background: #00b894;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #019875;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+      color: #019875;
+    }
+
+    .info-grid,
+    .restaurant-grid,
+    .platos-grid,
+    .beneficios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #00b894;
+    }
+
+    .card p {
+      line-height: 1.5;
+    }
+
+    .plato {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .plato img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .plato-content {
+      padding: 18px;
+    }
+
+    .precio {
+      font-size: 20px;
+      color: #019875;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .carrito {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 25px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      margin-top: 30px;
+    }
+
+    .carrito h3 {
+      margin-bottom: 15px;
+      color: #019875;
+    }
+
+    #lista-carrito {
+      list-style: none;
+      margin-bottom: 15px;
+      padding-left: 0;
+    }
+
+    #lista-carrito li {
+      background: #f1f1f1;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .total {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .contacto {
+      text-align: center;
+      background: #eafaf6;
+      border-radius: 14px;
+      padding: 40px 20px;
+    }
+
+    footer {
+      background: #013d33;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 30px;
+      }
+
+      header {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <h2>FitGo 🍏</h2>
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#">Menú</a>
-    <a href="#">Contacto</a>
-  </nav>
-</header>
+  <header>
+    <h1>FitGo 🍏</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#quienes">Quiénes somos</a>
+      <a href="#misionvision">Misión y visión</a>
+      <a href="#restaurantes">Restaurantes</a>
+      <a href="#platos">Platos</a>
+      <a href="#carrito">Carrito</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
 
-<section class="hero">
-  <h1>Comida saludable directo a tu casa</h1>
-  <p>Rápido, fresco y accesible</p>
-  <button class="btn">Ordenar ahora</button>
-</section>
+  <section class="hero" id="inicio">
+    <h2>Comida saludable directo a tu casa</h2>
+    <p>La forma más rápida, práctica y deliciosa de comer bien todos los días.</p>
+    <button class="btn" onclick="document.getElementById('platos').scrollIntoView({behavior:'smooth'})">
+      Pedir ahora
+    </button>
+  </section>
 
-<section class="hero">
-  <h2>¿Quiénes somos?</h2>
-  <p>FitGo es una plataforma de delivery enfocada en comida saludable tipo Rappi.</p>
-</section>
+  <section id="quienes">
+    <h2>¿Quiénes somos?</h2>
+    <div class="info-grid">
+      <div class="card">
+        <h3>Nuestra propuesta</h3>
+        <p>FitGo es una plataforma digital de delivery especializada en comida saludable, pensada para personas que desean alimentarse bien sin perder tiempo.</p>
+      </div>
+      <div class="card">
+        <h3>Qué hacemos</h3>
+        <p>Conectamos a los usuarios con restaurantes y emprendimientos saludables, ofreciendo una experiencia rápida, práctica y accesible desde la web.</p>
+      </div>
+      <div class="card">
+        <h3>Nuestro valor</h3>
+        <p>Buscamos ser una alternativa saludable frente al delivery tradicional, promoviendo mejores hábitos alimenticios con variedad, calidad y comodidad.</p>
+      </div>
+    </div>
+  </section>
 
-<section class="menu">
-  <div class="card">🥗 Ensalada Fit</div>
-  <div class="card">🍗 Pollo saludable</div>
-  <div class="card">🥤 Jugos naturales</div>
-</section>
+  <section id="misionvision">
+    <h2>Misión y visión</h2>
+    <div class="info-grid">
+      <div class="card">
+        <h3>Misión</h3>
+        <p>Brindar una plataforma de delivery eficiente y confiable que acerque comida saludable a los hogares de nuestros clientes, promoviendo bienestar, rapidez y accesibilidad.</p>
+      </div>
+      <div class="card">
+        <h3>Visión</h3>
+        <p>Ser la plataforma líder en delivery de comida saludable en el mercado peruano, reconocida por su innovación, calidad de servicio y compromiso con una alimentación equilibrada.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>¿Por qué elegir FitGo?</h2>
+    <div class="beneficios-grid">
+      <div class="card">
+        <h3>🥗 Variedad saludable</h3>
+        <p>Encuentra ensaladas, bowls, proteínas, snacks y bebidas naturales en un solo lugar.</p>
+      </div>
+      <div class="card">
+        <h3>⚡ Entrega rápida</h3>
+        <p>Recibe tus pedidos de manera ágil y segura sin complicaciones.</p>
+      </div>
+      <div class="card">
+        <h3>💚 Bienestar diario</h3>
+        <p>Promovemos una alimentación saludable adaptada al ritmo de vida actual.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="restaurantes">
+    <h2>Restaurantes aliados</h2>
+    <div class="restaurant-grid">
+      <div class="card">
+        <h3>Green Bowl</h3>
+        <p>Especialistas en bowls nutritivos, ensaladas frescas y combinaciones balanceadas.</p>
+      </div>
+      <div class="card">
+        <h3>Protein House</h3>
+        <p>Opciones altas en proteína para quienes buscan rendimiento, energía y buena nutrición.</p>
+      </div>
+      <div class="card">
+        <h3>Natural Juice Bar</h3>
+        <p>Jugos, smoothies y bebidas naturales preparados con ingredientes frescos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="platos">
+    <h2>Platos destacados</h2>
+    <div class="platos-grid">
+      <div class="plato">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80" alt="Ensalada Fit">
+        <div class="plato-content">
+          <h3>Ensalada Fit</h3>
+          <p>Mezcla fresca de vegetales, palta, pollo y aderezo ligero.</p>
+          <div class="precio">S/ 18.00</div>
+          <button class="btn" onclick="agregarAlCarrito('Ensalada Fit', 18)">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="plato">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80" alt="Bowl de Pollo">
+        <div class="plato-content">
+          <h3>Bowl de Pollo</h3>
+          <p>Arroz integral, verduras salteadas y pechuga de pollo grillada.</p>
+          <div class="precio">S/ 22.00</div>
+          <button class="btn" onclick="agregarAlCarrito('Bowl de Pollo', 22)">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="plato">
+        <img src="https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?auto=format&fit=crop&w=900&q=80" alt="Smoothie Verde">
+        <div class="plato-content">
+          <h3>Smoothie Verde</h3>
+          <p>Bebida natural con espinaca, piña, manzana y chía.</p>
+          <div class="precio">S/ 12.00</div>
+          <button class="btn" onclick="agregarAlCarrito('Smoothie Verde', 12)">Agregar al carrito</button>
+        </div>
+      </div>
+
+      <div class="plato">
+        <img src="https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=900&q=80" alt="Wrap Saludable">
+        <div class="plato-content">
+          <h3>Wrap Saludable</h3>
+          <p>Tortilla integral rellena de pollo, vegetales y salsa ligera.</p>
+          <div class="precio">S/ 16.00</div>
+          <button class="btn" onclick="agregarAlCarrito('Wrap Saludable', 16)">Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="carrito" id="carrito">
+      <h3>🛒 Carrito de compras</h3>
+      <ul id="lista-carrito">
+        <li>No hay productos agregados aún.</li>
+      </ul>
+      <div class="total">Total: S/ <span id="total">0.00</span></div>
+      <button class="btn" onclick="comprarAhora()">Comprar ahora</button>
+      <button class="btn" style="background:#555; margin-left:10px;" onclick="vaciarCarrito()">Vaciar carrito</button>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="contacto">
+      <h2>Contáctanos</h2>
+      <p><strong>WhatsApp:</strong> +51 999 999 999</p>
+      <p><strong>Correo:</strong> contacto@fitgo.com</p>
+      <p><strong>Horario:</strong> Lunes a domingo de 8:00 a.m. a 10:00 p.m.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 FitGo - Delivery saludable directo a tu casa</p>
+  </footer>
+
+  <script>
+    let carrito = [];
+    let total = 0;
+
+    function agregarAlCarrito(nombre, precio) {
+      carrito.push({ nombre, precio });
+      total += precio;
+      actualizarCarrito();
+    }
+
+    function actualizarCarrito() {
+      const lista = document.getElementById("lista-carrito");
+      const totalElemento = document.getElementById("total");
+
+      lista.innerHTML = "";
+
+      if (carrito.length === 0) {
+        lista.innerHTML = "<li>No hay productos agregados aún.</li>";
+      } else {
+        carrito.forEach((item, index) => {
+          const li = document.createElement("li");
+          li.innerHTML = item.nombre + " - S/ " + item.precio.toFixed(2);
+          lista.appendChild(li);
+        });
+      }
+
+      totalElemento.textContent = total.toFixed(2);
+    }
+
+    function vaciarCarrito() {
+      carrito = [];
+      total = 0;
+      actualizarCarrito();
+    }
+
+    function comprarAhora() {
+      if (carrito.length === 0) {
+        alert("Tu carrito está vacío.");
+      } else {
+        alert("Gracias por tu compra en FitGo. Tu pedido ha sido registrado.");
+      }
+    }
+  </script>
 
 </body>
 </html>
