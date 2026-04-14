@@ -2,70 +2,44 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FitGo</title>
   <style>
-    body {
-      font-family: Arial;
-      margin: 0;
-      background: #f5f5f5;
-      text-align: center;
-    }
-    header {
-      background: #00b894;
-      color: white;
-      padding: 20px;
-    }
-    h1 {
-      margin: 0;
-    }
-    section {
-      padding: 30px;
-    }
-    .btn {
-      background: #00b894;
-      color: white;
-      padding: 15px 25px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      border-radius: 8px;
-    }
-    .card {
-      background: white;
-      margin: 10px auto;
-      padding: 20px;
-      width: 80%;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    }
+    body {margin:0; font-family: Arial; background:#f5f5f5;}
+    header {background:#00b894; color:white; padding:15px; display:flex; justify-content:space-between;}
+    nav a {color:white; margin:0 10px; text-decoration:none;}
+    .hero {padding:40px; text-align:center;}
+    .btn {background:#00b894; color:white; padding:12px 20px; border:none; border-radius:8px;}
+    .menu {display:flex; flex-wrap:wrap; justify-content:center;}
+    .card {background:white; width:250px; margin:10px; padding:20px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);}
   </style>
 </head>
 <body>
 
 <header>
-  <h1>FitGo 🍏</h1>
-  <p>Comida saludable directo a tu casa</p>
+  <h2>FitGo 🍏</h2>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Menú</a>
+    <a href="#">Contacto</a>
+  </nav>
 </header>
 
-<section>
-  <h2>¿Qué es FitGo?</h2>
-  <div class="card">
-    Somos una plataforma de delivery enfocada en comida saludable, rápida y accesible.
-  </div>
+<section class="hero">
+  <h1>Comida saludable directo a tu casa</h1>
+  <p>Rápido, fresco y accesible</p>
+  <button class="btn">Ordenar ahora</button>
 </section>
 
-<section>
-  <h2>¿Qué ofrecemos?</h2>
-  <div class="card">🥗 Ensaladas frescas</div>
-  <div class="card">🍗 Proteínas saludables</div>
-  <div class="card">🥤 Bebidas naturales</div>
+<section class="hero">
+  <h2>¿Quiénes somos?</h2>
+  <p>FitGo es una plataforma de delivery enfocada en comida saludable tipo Rappi.</p>
 </section>
 
-<section>
-  <h2>Pide ahora</h2>
-  <button class="btn" onclick="alert('Pronto disponible 🚀')">
-    Ordenar comida
-  </button>
+<section class="menu">
+  <div class="card">🥗 Ensalada Fit</div>
+  <div class="card">🍗 Pollo saludable</div>
+  <div class="card">🥤 Jugos naturales</div>
 </section>
 
 </body>
