@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FitGo - Delivery saludable</title>
+  <title>FitGo - Portada</title>
   <style>
     :root{
       --verde-oscuro:#146b63;
-      --verde:#1f8a70;
+      --verde-principal:#1f8a70;
       --verde-limon:#9acd00;
       --verde-claro:#dff3b0;
-      --naranja:#ff9800;
+      --naranja:#ff8a1e;
       --blanco:#ffffff;
-      --gris:#2f2f39;
-      --gris-2:#666;
-      --gris-3:#f3f5f7;
-      --gris-4:#ebeff2;
-      --sombra:0 10px 25px rgba(0,0,0,.08);
+      --gris-texto:#2f2f39;
+      --gris-suave:#f3f5f7;
+      --gris-borde:#e7e7e7;
+      --sombra:0 8px 24px rgba(0,0,0,0.10);
       --radio:18px;
     }
 
@@ -28,75 +27,84 @@
     }
 
     body{
-      background:var(--gris-3);
-      color:var(--gris);
-      overflow-x:hidden;
+      background:#f7f7f7;
+      color:var(--gris-texto);
     }
 
-    a{text-decoration:none;color:inherit}
-    button{cursor:pointer;border:none}
-    img{max-width:100%}
-
-    .app{
-      min-height:100vh;
+    img{
+      max-width:100%;
+      display:block;
     }
 
-    /* HEADER */
+    button{
+      border:none;
+      cursor:pointer;
+      transition:0.25s ease;
+    }
+
+    /* ===== TOPBAR ===== */
     .topbar{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:var(--blanco);
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(6px);
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+      padding:14px 18px;
       display:flex;
       align-items:center;
       gap:14px;
-      padding:12px 18px;
-      box-shadow:0 2px 12px rgba(0,0,0,.06);
+      position:sticky;
+      top:0;
+      z-index:1000;
     }
 
     .menu-btn{
-      width:44px;
-      height:44px;
-      border-radius:12px;
-      background:var(--gris-3);
-      font-size:22px;
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      background:#f1f3f5;
+      font-size:28px;
+      color:#222;
     }
 
-    .brand{
+    .logo-area{
       display:flex;
       align-items:center;
-      gap:10px;
-      min-width:180px;
+      min-width:140px;
     }
 
-    .brand img{
-      height:42px;
+    .logo-area img{
+      height:44px;
+      width:auto;
       object-fit:contain;
     }
 
-    .location-pill{
+    .location-btn{
       display:flex;
       align-items:center;
       gap:8px;
       background:#fff7ef;
-      color:#d95c00;
-      border:1px solid #ffe1c2;
-      padding:10px 14px;
+      color:#d66700;
+      border:1px solid #ffd9b3;
+      padding:14px 18px;
       border-radius:999px;
       font-weight:bold;
+      font-size:15px;
       white-space:nowrap;
     }
 
     .search-bar{
       flex:1;
+      height:58px;
       display:flex;
       align-items:center;
       gap:10px;
-      background:var(--gris-3);
-      border-radius:16px;
-      padding:0 14px;
-      height:48px;
+      background:#eef1f3;
+      border-radius:18px;
+      padding:0 18px;
       min-width:200px;
+    }
+
+    .search-bar span{
+      font-size:20px;
     }
 
     .search-bar input{
@@ -104,7 +112,14 @@
       border:none;
       background:transparent;
       outline:none;
-      font-size:15px;
+      font-size:16px;
+      color:#444;
+    }
+
+    .search-btn{
+      background:transparent;
+      font-size:22px;
+      color:#666;
     }
 
     .top-actions{
@@ -113,1739 +128,367 @@
       gap:10px;
     }
 
-    .icon-btn{
-      width:44px;
-      height:44px;
-      border-radius:12px;
-      background:var(--gris-3);
-      font-size:18px;
-    }
-
-    .ghost-btn{
+    .login-btn{
+      display:flex;
+      align-items:center;
+      gap:8px;
       background:transparent;
       font-weight:bold;
-      padding:10px 14px;
+      font-size:16px;
+      color:#222;
+      padding:10px 12px;
       border-radius:12px;
     }
 
-    .cart-badge{
+    .cart-btn{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      background:#eef1f3;
+      font-size:24px;
       position:relative;
     }
 
     .cart-count{
       position:absolute;
-      top:-6px;
-      right:-2px;
+      top:-5px;
+      right:-5px;
+      width:24px;
+      height:24px;
+      border-radius:50%;
       background:var(--naranja);
-      color:var(--blanco);
-      font-size:11px;
-      width:20px;
-      height:20px;
+      color:white;
+      font-size:12px;
+      font-weight:bold;
       display:flex;
       align-items:center;
       justify-content:center;
-      border-radius:50%;
-      font-weight:bold;
     }
 
-    /* DRAWER */
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.35);
-      opacity:0;
-      visibility:hidden;
-      transition:.25s ease;
-      z-index:1200;
-    }
-
-    .overlay.show{
-      opacity:1;
-      visibility:visible;
-    }
-
-    .drawer{
-      position:fixed;
-      top:0;
-      left:-370px;
-      width:340px;
-      max-width:92vw;
-      height:100vh;
-      background:var(--blanco);
-      z-index:1300;
-      transition:.3s ease;
-      box-shadow:var(--sombra);
-      overflow-y:auto;
-    }
-
-    .drawer.show{
-      left:0;
-    }
-
-    .drawer-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:18px;
-      border-bottom:1px solid #ececec;
-    }
-
-    .drawer-logo{
-      height:36px;
-    }
-
-    .close-btn{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      background:var(--gris-3);
-      font-size:18px;
-    }
-
-    .drawer-body{
-      padding:18px;
-    }
-
-    .drawer-auth{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-bottom:16px;
-    }
-
-    .auth-btn{
-      background:#2bd67b;
-      color:#fff;
-      border-radius:14px;
-      padding:14px 12px;
-      font-weight:bold;
-    }
-
-    .promo-box{
-      background:#e8e2ff;
-      border-radius:18px;
-      padding:16px;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:20px;
-      color:#5b21b6;
-      font-weight:bold;
-    }
-
-    .drawer-section-title{
-      color:#888;
-      font-size:13px;
-      text-transform:uppercase;
-      margin:16px 0 12px;
-    }
-
-    .drawer-list{
-      list-style:none;
-    }
-
-    .drawer-list li{
-      padding:14px 0;
-      border-bottom:1px solid #f1f1f1;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      font-size:18px;
-      font-weight:bold;
-    }
-
-    .drawer-small li{
-      font-size:16px;
-      font-weight:normal;
-    }
-
-    /* HERO */
+    /* ===== HERO ===== */
     .hero{
-      background:linear-gradient(135deg, #ff7b2f 0%, #ff5f1f 40%, #ff7f11 100%);
-      color:var(--blanco);
-      padding:70px 20px 40px;
-    }
-
-    .hero-inner{
-      max-width:1250px;
-      margin:auto;
-      display:grid;
-      grid-template-columns:1.2fr .9fr;
-      gap:30px;
+      min-height:calc(100vh - 86px);
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(20,107,99,0.72), rgba(31,138,112,0.76)),
+        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1600&q=80');
+      background-size:cover;
+      background-position:center;
+      display:flex;
       align-items:center;
     }
 
-    .hero-copy h1{
-      font-size:58px;
-      line-height:1.05;
-      margin-bottom:18px;
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(154,205,0,0.22), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255,138,30,0.18), transparent 22%),
+        radial-gradient(circle at 60% 80%, rgba(223,243,176,0.16), transparent 24%);
+      pointer-events:none;
+    }
+
+    .hero-container{
+      position:relative;
+      z-index:2;
+      width:100%;
+      max-width:1300px;
+      margin:0 auto;
+      padding:50px 24px 70px;
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:34px;
+      align-items:center;
+    }
+
+    .hero-left{
+      color:white;
+    }
+
+    .hero-left h1{
+      font-size:72px;
+      line-height:1.03;
       font-weight:300;
+      margin-bottom:20px;
+      max-width:760px;
     }
 
-    .hero-copy h1 span{
+    .hero-left h1 strong{
       font-weight:800;
+      color:#ffffff;
     }
 
-    .hero-copy p{
-      font-size:19px;
+    .hero-left p{
+      font-size:22px;
       line-height:1.6;
-      margin-bottom:24px;
-      max-width:700px;
+      max-width:760px;
+      margin-bottom:28px;
+      color:rgba(255,255,255,0.95);
     }
 
-    .join-actions{
+    .hero-buttons{
       display:flex;
       flex-wrap:wrap;
-      gap:14px;
-      margin-bottom:22px;
+      gap:16px;
+      margin-bottom:28px;
     }
 
-    .join-btn{
-      padding:14px 20px;
-      border-radius:14px;
+    .btn-main{
+      padding:18px 26px;
+      border-radius:18px;
+      font-size:18px;
       font-weight:bold;
-      font-size:15px;
+      box-shadow:var(--sombra);
     }
 
-    .join-client{
+    .btn-client{
       background:var(--blanco);
       color:var(--verde-oscuro);
     }
 
-    .join-restaurant{
-      background:#1fd67a;
-      color:#fff;
+    .btn-client:hover{
+      transform:translateY(-3px);
+      background:#f5f5f5;
     }
 
-    .location-box{
-      background:rgba(255,255,255,.12);
+    .btn-restaurant{
+      background:#2bd67b;
+      color:white;
+    }
+
+    .btn-restaurant:hover{
+      transform:translateY(-3px);
+      background:#1dc869;
+    }
+
+    .delivery-box{
+      background:rgba(255,255,255,0.14);
       border-radius:28px;
-      padding:22px;
-      backdrop-filter:blur(3px);
-      box-shadow:var(--sombra);
+      padding:26px;
       max-width:920px;
+      backdrop-filter:blur(8px);
+      box-shadow:var(--sombra);
     }
 
-    .location-input{
-      background:var(--blanco);
-      border-radius:16px;
+    .delivery-input{
+      background:white;
+      border-radius:18px;
+      min-height:72px;
       display:flex;
       align-items:center;
       gap:12px;
-      padding:16px 18px;
+      padding:0 22px;
       margin-bottom:18px;
-      color:#666;
     }
 
-    .location-input input{
+    .delivery-input span{
+      font-size:22px;
+      color:#777;
+    }
+
+    .delivery-input input{
       flex:1;
       border:none;
       outline:none;
-      font-size:16px;
+      font-size:18px;
+      color:#555;
       background:transparent;
     }
 
-    .hero-links{
+    .delivery-links{
       display:flex;
       flex-wrap:wrap;
-      gap:20px;
+      gap:24px;
       align-items:center;
-      font-weight:bold;
     }
 
-    .hero-links button{
+    .delivery-link{
       background:transparent;
-      color:#fff;
+      color:white;
+      font-size:17px;
       font-weight:bold;
-      font-size:16px;
     }
 
-    .hero-card{
+    .hero-right{
       display:flex;
       justify-content:center;
       align-items:center;
+    }
+
+    .hero-card{
+      width:100%;
+      max-width:520px;
+      background:rgba(255,255,255,0.10);
+      border-radius:34px;
+      padding:20px;
+      backdrop-filter:blur(8px);
+      box-shadow:0 18px 40px rgba(0,0,0,0.16);
     }
 
     .hero-card img{
       width:100%;
-      max-width:470px;
-      border-radius:28px;
-      box-shadow:0 16px 40px rgba(0,0,0,.18);
-    }
-
-    /* MAIN */
-    .section{
-      max-width:1250px;
-      margin:auto;
-      padding:42px 20px;
-    }
-
-    .section h2{
-      font-size:24px;
-      margin-bottom:20px;
-    }
-
-    .section p.section-sub{
-      color:#666;
-      margin-bottom:20px;
-    }
-
-    /* CATEGORIES */
-    .main-grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:24px;
-    }
-
-    .category-grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(180px, 1fr));
-      gap:18px;
-      margin-bottom:20px;
-    }
-
-    .cat-card-big{
       border-radius:26px;
-      overflow:hidden;
-      box-shadow:var(--sombra);
-      background:#fff;
-      transition:.25s ease;
+      object-fit:cover;
     }
 
-    .cat-card-big:hover,
-    .cat-card-small:hover,
-    .rest-card:hover,
-    .dish-card:hover{
-      transform:translateY(-4px);
-    }
-
-    .cat-top{
-      min-height:180px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:80px;
-    }
-
-    .cat-top.orange{background:#ff5a21}
-    .cat-top.green{background:#34d184}
-    .cat-bottom{
-      background:#f6eded;
-      text-align:center;
-      padding:16px;
-      font-size:18px;
-    }
-
-    .cat-bottom.greenish{
-      background:#e5f4eb;
-    }
-
-    .category-row{
-      display:grid;
-      grid-template-columns:repeat(6, minmax(120px, 1fr));
-      gap:18px;
-    }
-
-    .cat-card-small{
-      text-align:center;
-      padding:18px 10px;
-      background:#fff;
-      border-radius:22px;
-      box-shadow:var(--sombra);
-      transition:.25s ease;
-    }
-
-    .cat-icon{
-      font-size:44px;
-      margin-bottom:12px;
-    }
-
-    .cat-name{
-      font-size:16px;
-    }
-
-    /* JOIN SECTION */
-    .join-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:24px;
-      margin-top:10px;
-    }
-
-    .join-card{
-      background:#fff;
-      border-radius:20px;
-      overflow:hidden;
-      box-shadow:var(--sombra);
-    }
-
-    .join-image{
-      height:180px;
-      background:linear-gradient(135deg, var(--verde-oscuro), var(--verde-limon));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-size:70px;
-    }
-
-    .join-content{
-      padding:22px;
-      text-align:center;
-    }
-
-    .join-content h3{
-      font-size:20px;
-      margin-bottom:12px;
-    }
-
-    .join-content p{
-      color:#666;
-      line-height:1.6;
-      min-height:72px;
-    }
-
-    .join-content button{
-      margin-top:16px;
-      width:100%;
-      padding:14px;
-      border-radius:14px;
-      background:#dff3e8;
-      color:#1fbf67;
-      font-weight:bold;
-    }
-
-    /* RESULTS AREA */
-    .results-wrap{
-      display:none;
-    }
-
-    .results-wrap.active{
-      display:block;
-    }
-
-    .toolbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
-    }
-
-    .toolbar h2{
-      margin:0;
-      font-size:20px;
-    }
-
-    .toolbar-right{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .toolbar select{
-      border:1px solid #ddd;
-      padding:12px 14px;
-      border-radius:999px;
-      background:#fff;
-      outline:none;
-    }
-
-    .most-searched{
-      background:#fff;
-      border-radius:20px;
-      padding:18px;
-      box-shadow:var(--sombra);
-      margin-bottom:20px;
-    }
-
-    .horizontal-scroll{
-      display:flex;
-      gap:16px;
-      overflow:auto;
-      padding-bottom:8px;
-    }
-
-    .mini-rest{
-      min-width:110px;
-      text-align:center;
-    }
-
-    .mini-logo{
-      width:86px;
-      height:86px;
-      border-radius:50%;
-      background:linear-gradient(135deg,#fff,#e8eef2);
-      box-shadow:var(--sombra);
-      margin:0 auto 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:34px;
-    }
-
-    /* RESTAURANTS */
-    .rest-list{
-      display:flex;
-      flex-direction:column;
-      gap:22px;
-    }
-
-    .rest-card{
-      background:#fff;
-      border-radius:22px;
-      box-shadow:var(--sombra);
-      padding:18px;
-      transition:.25s ease;
-    }
-
-    .rest-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:18px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-
-    .rest-title{
-      display:flex;
-      gap:16px;
-      align-items:flex-start;
-    }
-
-    .rest-avatar{
-      width:60px;
-      height:60px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--verde-oscuro),var(--verde-limon));
-      color:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:22px;
-      flex-shrink:0;
-    }
-
-    .rest-title h3{
-      font-size:28px;
-      margin-bottom:8px;
-    }
-
-    .rest-meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      color:#666;
-      font-size:14px;
-    }
-
-    .delivery-pill{
-      color:#0f73ff;
-      font-weight:bold;
-    }
-
-    .go-store{
-      color:#17b44f;
-      font-weight:bold;
-      background:transparent;
-      font-size:16px;
-    }
-
-    .dish-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:16px;
-    }
-
-    .dish-card{
-      border:1px solid #edf0f2;
-      border-radius:18px;
-      padding:14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-      transition:.25s ease;
-      background:#fcfcfd;
-    }
-
-    .dish-left{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      flex:1;
-      min-width:0;
-    }
-
-    .dish-img{
-      width:92px;
-      height:92px;
-      border-radius:16px;
-      background:linear-gradient(135deg,#e9f7da,#fff3d9);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:44px;
-      flex-shrink:0;
-    }
-
-    .dish-info h4{
-      font-size:15px;
-      margin-bottom:8px;
-    }
-
-    .dish-info p{
-      color:#666;
-      margin-bottom:8px;
-      font-size:14px;
-    }
-
-    .dish-info strong{
-      font-size:16px;
-    }
-
-    .plus-btn{
-      width:48px;
-      height:48px;
-      border-radius:50%;
-      background:#2dd36f;
-      color:#fff;
-      font-size:30px;
-      line-height:1;
-      flex-shrink:0;
-    }
-
-    /* PRODUCT MODAL */
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.4);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:1500;
-      padding:20px;
-    }
-
-    .modal.show{
-      display:flex;
-    }
-
-    .modal-card{
-      background:#fff;
-      width:min(1100px,100%);
-      max-height:90vh;
-      overflow:auto;
-      border-radius:22px;
-      box-shadow:var(--sombra);
-    }
-
-    .modal-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:18px 22px;
-      border-bottom:1px solid #eee;
-      position:sticky;
-      top:0;
-      background:#fff;
-      z-index:1;
-    }
-
-    .modal-head h3{
-      font-size:22px;
-    }
-
-    .modal-close{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      background:var(--gris-3);
-      font-size:18px;
-    }
-
-    .product-detail{
-      display:grid;
-      grid-template-columns:1fr 1.2fr;
-      gap:26px;
-      padding:24px;
-    }
-
-    .product-visual{
-      background:#fffaf1;
-      border-radius:22px;
-      min-height:350px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:150px;
-    }
-
-    .product-options h4{
-      font-size:18px;
-      margin-bottom:12px;
-      margin-top:16px;
-    }
-
-    .option-box{
-      border:1px solid #e6eaed;
-      border-radius:16px;
-      overflow:hidden;
-      margin-bottom:14px;
-    }
-
-    .option-item{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      padding:18px;
-      border-bottom:1px solid #eef1f2;
-    }
-
-    .option-item:last-child{
-      border-bottom:none;
-    }
-
-    .tag-oblig{
-      display:inline-block;
-      background:var(--naranja);
-      color:#fff;
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:10px;
-      margin-bottom:10px;
-    }
-
-    .radio-circle{
-      width:26px;
-      height:26px;
-      border-radius:50%;
-      border:2px solid #bbc2c8;
-      background:#fff;
-      flex-shrink:0;
-    }
-
-    .product-bottom{
-      position:sticky;
-      bottom:0;
-      display:flex;
-      gap:16px;
-      align-items:center;
-      padding:16px 24px;
-      background:#fff;
-      border-top:1px solid #eee;
-    }
-
-    .qty-box{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      border:1px solid #d9dfe3;
-      border-radius:14px;
-      padding:10px 14px;
-    }
-
-    .qty-btn{
-      width:34px;
-      height:34px;
-      border-radius:10px;
-      background:var(--gris-3);
-      font-size:22px;
-    }
-
-    .secondary-action{
-      flex:1;
-      padding:14px 16px;
-      border-radius:14px;
-      background:#eef2f4;
-      color:#a1a9b1;
-      font-weight:bold;
-    }
-
-    .primary-action{
-      flex:1.2;
-      padding:14px 16px;
-      border-radius:14px;
-      background:#2dd36f;
-      color:#fff;
-      font-weight:bold;
-    }
-
-    /* CHECKOUT DRAWER */
-    .checkout{
-      position:fixed;
-      top:0;
-      right:-450px;
-      width:420px;
-      max-width:95vw;
-      height:100vh;
-      background:#fff;
-      z-index:1400;
-      box-shadow:-8px 0 24px rgba(0,0,0,.15);
-      transition:.3s ease;
-      display:flex;
-      flex-direction:column;
-    }
-
-    .checkout.show{
-      right:0;
-    }
-
-    .checkout-head{
-      padding:18px;
-      border-bottom:1px solid #eee;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-
-    .checkout-body{
-      padding:18px;
-      overflow:auto;
-      flex:1;
-    }
-
-    .checkout h3{
-      color:var(--verde-oscuro);
-    }
-
-    .checkout-group{
-      margin-bottom:18px;
-    }
-
-    .checkout-group label{
-      display:block;
-      font-weight:bold;
-      margin-bottom:8px;
-    }
-
-    .checkout-group input,
-    .checkout-group select,
-    .checkout-group textarea{
-      width:100%;
-      padding:14px;
-      border:1px solid #dde2e6;
-      border-radius:14px;
-      outline:none;
-      background:#fff;
-    }
-
-    .cart-items{
-      list-style:none;
-      margin-bottom:16px;
-    }
-
-    .cart-items li{
-      padding:12px 0;
-      border-bottom:1px solid #f0f0f0;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .summary{
-      background:#f8fafb;
-      padding:14px;
-      border-radius:16px;
-      margin-bottom:16px;
-    }
-
-    .summary-row{
-      display:flex;
-      justify-content:space-between;
-      margin-bottom:10px;
-      color:#555;
-    }
-
-    .summary-total{
-      display:flex;
-      justify-content:space-between;
-      font-size:20px;
-      font-weight:bold;
-      color:var(--verde-oscuro);
-      margin-top:12px;
-    }
-
-    .checkout-footer{
-      padding:18px;
-      border-top:1px solid #eee;
-      background:#fff;
-    }
-
-    .checkout-btn{
-      width:100%;
-      padding:16px;
-      border-radius:14px;
-      background:var(--naranja);
-      color:#fff;
-      font-weight:bold;
-      font-size:16px;
-    }
-
-    /* FOOTER */
-    .footer{
-      background:#fff;
-      margin-top:20px;
-      border-top:1px solid #e6e9ec;
-    }
-
-    .footer-grid{
-      max-width:1250px;
-      margin:auto;
-      padding:36px 20px;
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:24px;
-    }
-
-    .footer h4{
-      font-size:18px;
-      margin-bottom:14px;
-    }
-
-    .footer ul{
-      list-style:none;
-      color:#555;
-    }
-
-    .footer li{
-      margin-bottom:10px;
-      line-height:1.5;
-    }
-
-    .footer-bottom{
-      text-align:center;
-      padding:18px;
-      border-top:1px solid #edf0f2;
-      color:#666;
-      font-size:14px;
-    }
-
-    @media (max-width:1100px){
-      .hero-inner,
-      .join-grid,
-      .footer-grid,
-      .dish-grid,
-      .product-detail{
-        grid-template-columns:1fr 1fr;
-      }
-      .category-row{
-        grid-template-columns:repeat(3, minmax(120px, 1fr));
-      }
-    }
-
-    @media (max-width:850px){
-      .hero-inner,
-      .join-grid,
-      .footer-grid,
-      .product-detail{
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px){
+      .hero-container{
         grid-template-columns:1fr;
       }
-      .hero-copy h1{
-        font-size:40px;
+
+      .hero-left h1{
+        font-size:56px;
       }
-      .dish-grid{
-        grid-template-columns:1fr;
+
+      .hero-right{
+        justify-content:flex-start;
       }
-      .category-row{
-        grid-template-columns:repeat(2, minmax(120px, 1fr));
-      }
+    }
+
+    @media (max-width: 820px){
       .topbar{
         flex-wrap:wrap;
       }
-      .location-pill{
-        order:3;
+
+      .logo-area{
+        min-width:auto;
+      }
+
+      .search-bar{
+        order:5;
         width:100%;
-        justify-content:center;
+      }
+
+      .location-btn{
+        order:4;
+      }
+
+      .hero-left h1{
+        font-size:46px;
+      }
+
+      .hero-left p{
+        font-size:19px;
       }
     }
 
-    @media (max-width:560px){
-      .brand{
-        min-width:auto;
+    @media (max-width: 560px){
+      .topbar{
+        padding:12px;
+        gap:10px;
       }
-      .brand img{
-        height:34px;
+
+      .menu-btn,
+      .cart-btn{
+        width:48px;
+        height:48px;
       }
+
+      .logo-area img{
+        height:36px;
+      }
+
+      .location-btn{
+        width:100%;
+        justify-content:center;
+      }
+
       .hero{
-        padding-top:40px;
+        min-height:auto;
       }
-      .hero-copy h1{
-        font-size:33px;
+
+      .hero-container{
+        padding:36px 16px 50px;
       }
-      .category-grid{
-        grid-template-columns:1fr;
+
+      .hero-left h1{
+        font-size:38px;
       }
-      .category-row{
-        grid-template-columns:repeat(2,1fr);
+
+      .hero-left p{
+        font-size:18px;
       }
-      .footer-grid{
-        grid-template-columns:1fr;
+
+      .btn-main{
+        width:100%;
       }
-      .hero-links{
+
+      .delivery-links{
         flex-direction:column;
         align-items:flex-start;
-      }
-      .search-bar{
-        order:4;
-        width:100%;
+        gap:14px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
 
-    <!-- Drawer -->
-    <aside class="drawer" id="drawer">
-      <div class="drawer-top">
-        <img src="./logo.jpeg" alt="FitGo">
-        <button class="close-btn" onclick="toggleDrawer(false)">✕</button>
-      </div>
+  <!-- ===== BARRA SUPERIOR ===== -->
+  <header class="topbar">
+    <button class="menu-btn">☰</button>
 
-      <div class="drawer-body">
-        <div class="drawer-auth">
-          <button class="auth-btn" onclick="simularLogin()">Ingreso</button>
-          <button class="auth-btn" onclick="alert('Pronto habilitaremos el registro de clientes.')">Registro</button>
-        </div>
-
-        <div class="promo-box">
-          🥗 Descubre nuestras promociones saludables
-        </div>
-
-        <div class="drawer-section-title">Secciones</div>
-        <ul class="drawer-list">
-          <li onclick="goTo('resultados')">Restaurantes <span>›</span></li>
-          <li onclick="filtrarCategoria('tienda')">Tiendas Fit <span>›</span></li>
-          <li onclick="filtrarCategoria('vegano')">Vegano <span>›</span></li>
-          <li onclick="filtrarCategoria('bowls')">Bowls <span>›</span></li>
-          <li onclick="filtrarCategoria('jugos')">Jugos <span>›</span></li>
-        </ul>
-
-        <div class="drawer-section-title">Otros</div>
-        <ul class="drawer-list drawer-small">
-          <li onclick="goTo('join')">Registra tu restaurante</li>
-          <li onclick="goTo('join')">Registra tu tienda</li>
-          <li onclick="alert('Pronto podrás postular como repartidor FitGo.')">Quiero ser repartidor</li>
-          <li onclick="goTo('contacto')">Contacto</li>
-        </ul>
-      </div>
-    </aside>
-
-    <!-- Checkout Drawer -->
-    <aside class="checkout" id="checkoutDrawer">
-      <div class="checkout-head">
-        <h3>Tu pedido FitGo</h3>
-        <button class="close-btn" onclick="toggleCheckout(false)">✕</button>
-      </div>
-
-      <div class="checkout-body">
-        <div class="checkout-group">
-          <label>Dirección de entrega</label>
-          <input type="text" id="direccionEntrega" placeholder="Ej. Av. Ejército 123, Cayma">
-        </div>
-
-        <div class="checkout-group">
-          <label>Referencia</label>
-          <textarea id="referenciaEntrega" rows="3" placeholder="Ej. Frente a la farmacia, tercer piso"></textarea>
-        </div>
-
-        <div class="checkout-group">
-          <label>Método de pago</label>
-          <select id="metodoPago">
-            <option value="">Selecciona un método</option>
-            <option>Yape</option>
-            <option>Plin</option>
-            <option>Tarjeta</option>
-            <option>Efectivo</option>
-            <option>Transferencia</option>
-          </select>
-        </div>
-
-        <div class="checkout-group">
-          <label>Productos agregados</label>
-          <ul class="cart-items" id="checkoutItems">
-            <li>No hay productos en el carrito.</li>
-          </ul>
-        </div>
-
-        <div class="summary">
-          <div class="summary-row">
-            <span>Subtotal</span>
-            <span>S/ <span id="sumSubtotal">0.00</span></span>
-          </div>
-          <div class="summary-row">
-            <span>Delivery</span>
-            <span>S/ <span id="sumDelivery">5.00</span></span>
-          </div>
-          <div class="summary-total">
-            <span>Total</span>
-            <span>S/ <span id="sumTotal">5.00</span></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="checkout-footer">
-        <button class="checkout-btn" onclick="confirmarPedido()">Confirmar pedido</button>
-      </div>
-    </aside>
-
-    <!-- Product Modal -->
-    <div class="modal" id="productModal">
-      <div class="modal-card">
-        <div class="modal-head">
-          <h3 id="modalProductName">Producto</h3>
-          <button class="modal-close" onclick="closeProductModal()">✕</button>
-        </div>
-
-        <div class="product-detail">
-          <div class="product-visual" id="modalProductEmoji">🥗</div>
-
-          <div class="product-options">
-            <h3 style="font-size:32px; margin-bottom:10px;" id="modalPrice">S/ 0.00</h3>
-            <p id="modalDescription" style="color:#555; line-height:1.7; margin-bottom:10px;">
-              Descripción del producto.
-            </p>
-
-            <h4>Elige tu versión</h4>
-            <span class="tag-oblig">Obligatorio</span>
-            <div class="option-box">
-              <div class="option-item">
-                <span>Versión clásica saludable</span>
-                <div class="radio-circle"></div>
-              </div>
-              <div class="option-item">
-                <span>Versión alta en proteína</span>
-                <div class="radio-circle"></div>
-              </div>
-            </div>
-
-            <h4>Complementos</h4>
-            <span class="tag-oblig">Opcional</span>
-            <div class="option-box">
-              <div class="option-item">
-                <span>Agregar bebida natural</span>
-                <div class="radio-circle"></div>
-              </div>
-              <div class="option-item">
-                <span>Agregar snack fit</span>
-                <div class="radio-circle"></div>
-              </div>
-            </div>
-
-            <h4>Tiempo estimado</h4>
-            <p id="modalEta" style="font-weight:bold; color:var(--verde-oscuro)">25 min</p>
-          </div>
-        </div>
-
-        <div class="product-bottom">
-          <div class="qty-box">
-            <button class="qty-btn" onclick="changeQty(-1)">−</button>
-            <strong id="qtyValue">1</strong>
-            <button class="qty-btn" onclick="changeQty(1)">+</button>
-          </div>
-          <button class="secondary-action">Agregar y seguir comprando</button>
-          <button class="primary-action" onclick="agregarModalAlCarrito()">Agregar e ir a pagar</button>
-        </div>
-      </div>
+    <div class="logo-area">
+      <img src="./logo.jpeg" alt="FitGo">
     </div>
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <button class="menu-btn" onclick="toggleDrawer(true)">☰</button>
+    <button class="location-btn">📍 Arequipa</button>
 
-      <a href="#" class="brand" onclick="mostrarHome()">
-        <img src="logo.jpeg" alt="FitGo">
-      </a>
+    <div class="search-bar">
+      <span>🥬</span>
+      <input type="text" placeholder="Comida saludable, restaurantes, tiendas, productos...">
+      <button class="search-btn">🔍</button>
+    </div>
 
-      <button class="location-pill" onclick="pedirUbicacion()">📍 <span id="currentLocationText">Arequipa</span></button>
+    <div class="top-actions">
+      <button class="login-btn">👤 Ingreso</button>
+      <button class="cart-btn">
+        🛒
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </header>
 
-      <div class="search-bar">
-        <span>🥬</span>
-        <input type="text" id="mainSearch" placeholder="Comida saludable, restaurantes, tiendas, productos...">
-        <button class="ghost-btn" onclick="buscarGeneral()">🔍</button>
-      </div>
+  <!-- ===== PORTADA ===== -->
+  <section class="hero">
+    <div class="hero-container">
 
-      <div class="top-actions">
-        <button class="ghost-btn" onclick="simularLogin()">👤 Ingreso</button>
-        <button class="icon-btn cart-badge" onclick="toggleCheckout(true)">
-          🛒
-          <span class="cart-count" id="cartCount">0</span>
-        </button>
-      </div>
-    </header>
+      <div class="hero-left">
+        <h1>Si tienes <strong>FitGo</strong>, tienes comida saludable.</h1>
 
-    <!-- HOME -->
-    <main id="homeView">
-      <section class="hero">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <h1>Si tienes <span>FitGo</span>, tienes comida saludable.</h1>
-            <p>
-              Encuentra restaurantes, tiendas y productos fit en un solo lugar. Pide bowls, ensaladas, snacks, bebidas naturales y opciones veganas en Arequipa.
-            </p>
+        <p>
+          Encuentra restaurantes, tiendas y productos fit en un solo lugar.
+          Pide bowls, ensaladas, snacks, bebidas naturales y opciones veganas en Arequipa.
+        </p>
 
-            <div class="join-actions">
-              <button class="join-btn join-client" onclick="simularLogin()">Unirme como cliente</button>
-              <button class="join-btn join-restaurant" onclick="goTo('join')">Registrar restaurante</button>
-            </div>
-
-            <div class="location-box">
-              <div class="location-input">
-                <span>📍</span>
-                <input type="text" id="heroLocationInput" placeholder="¿Dónde quieres recibir tu compra?">
-              </div>
-
-              <div class="hero-links">
-                <button onclick="pedirUbicacion()">◎ Usa tu ubicación actual</button>
-                <button onclick="simularLogin()">Iniciar sesión para ver tus direcciones recientes</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-card">
-            <img src="logo fondo oscuro.jpeg" alt="Logo FitGo portada">
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>¿Necesitas algo más?</h2>
-
-        <div class="category-grid">
-          <div class="cat-card-big" onclick="irAResultados('restaurantes')">
-            <div class="cat-top orange">🥗</div>
-            <div class="cat-bottom">Restaurantes</div>
-          </div>
-
-          <div class="cat-card-big" onclick="irAResultados('tiendas')">
-            <div class="cat-top green">🛒</div>
-            <div class="cat-bottom greenish">Tiendas Fit</div>
-          </div>
+        <div class="hero-buttons">
+          <button class="btn-main btn-client">Unirme como cliente</button>
+          <button class="btn-main btn-restaurant">Registrar restaurante</button>
         </div>
 
-        <div class="category-row">
-          <div class="cat-card-small" onclick="filtrarCategoria('vegano')">
-            <div class="cat-icon">🌱</div>
-            <div class="cat-name">Vegano</div>
-          </div>
-          <div class="cat-card-small" onclick="filtrarCategoria('snacks')">
-            <div class="cat-icon">🍓</div>
-            <div class="cat-name">Snacks</div>
-          </div>
-          <div class="cat-card-small" onclick="filtrarCategoria('bowls')">
-            <div class="cat-icon">🍚</div>
-            <div class="cat-name">Bowls</div>
-          </div>
-          <div class="cat-card-small" onclick="filtrarCategoria('jugos')">
-            <div class="cat-icon">🥤</div>
-            <div class="cat-name">Jugos</div>
-          </div>
-          <div class="cat-card-small" onclick="filtrarCategoria('ensaladas')">
-            <div class="cat-icon">🥬</div>
-            <div class="cat-name">Ensaladas</div>
-          </div>
-          <div class="cat-card-small" onclick="filtrarCategoria('proteina')">
-            <div class="cat-icon">🍗</div>
-            <div class="cat-name">Proteína</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="join">
-        <h2>Únete a FitGo</h2>
-        <p class="section-sub">Conecta con más usuarios que buscan comida saludable, rápida y accesible en Arequipa.</p>
-
-        <div class="join-grid">
-          <div class="join-card">
-            <div class="join-image">👨‍🍳</div>
-            <div class="join-content">
-              <h3>Registra tu restaurante</h3>
-              <p>Integra tu restaurante saludable y llega a nuevos clientes que buscan ensaladas, bowls, wraps y opciones nutritivas.</p>
-              <button onclick="alert('Pronto habilitaremos el formulario para restaurantes.')">Conocer más</button>
-            </div>
+        <div class="delivery-box">
+          <div class="delivery-input">
+            <span>📍</span>
+            <input type="text" placeholder="¿Dónde quieres recibir tu compra?">
           </div>
 
-          <div class="join-card">
-            <div class="join-image">🏪</div>
-            <div class="join-content">
-              <h3>Registra tu tienda fit</h3>
-              <p>Si vendes snacks saludables, suplementos, bebidas naturales o productos orgánicos, puedes unirte a FitGo.</p>
-              <button onclick="alert('Pronto habilitaremos el formulario para tiendas.')">Conocer más</button>
-            </div>
+          <div class="delivery-links">
+            <button class="delivery-link">◎ Usa tu ubicación actual</button>
+            <button class="delivery-link">Iniciar sesión para ver tus direcciones recientes</button>
           </div>
-
-          <div class="join-card">
-            <div class="join-image">🛵</div>
-            <div class="join-content">
-              <h3>Únete como repartidor</h3>
-              <p>Forma parte del delivery saludable y gana ingresos repartiendo productos de bienestar y alimentación consciente.</p>
-              <button onclick="alert('Pronto habilitaremos el formulario para repartidores.')">¡Regístrate ahora!</button>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- RESULTS -->
-    <section class="section results-wrap" id="resultadosView">
-      <div class="toolbar">
-        <h2 id="resultsTitle">Top resultados saludables en Arequipa</h2>
-        <div class="toolbar-right">
-          <select id="searchInSelect">
-            <option>Todas las secciones</option>
-            <option>Restaurantes</option>
-            <option>Tiendas</option>
-            <option>Vegano</option>
-          </select>
-          <select id="sortBySelect">
-            <option>Relevancia</option>
-            <option>Precio</option>
-            <option>Tiempo de entrega</option>
-            <option>Valoración</option>
-          </select>
         </div>
       </div>
 
-      <div class="most-searched">
-        <h2 style="font-size:18px; margin-bottom:14px;">Más buscados</h2>
-        <div class="horizontal-scroll" id="mostSearchedList"></div>
-      </div>
-
-      <div class="rest-list" id="restaurantList"></div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer" id="contacto">
-      <div class="footer-grid">
-        <div>
-          <h4>Top restaurantes y tiendas saludables</h4>
-          <ul>
-            <li>Punto Verde</li>
-            <li>Healthy Food</li>
-            <li>Zum</li>
-            <li>Organa</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Categorías</h4>
-          <ul>
-            <li>Ensaladas</li>
-            <li>Bowls</li>
-            <li>Jugos naturales</li>
-            <li>Snacks fit</li>
-            <li>Vegano</li>
-            <li>Proteína</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Únete a FitGo</h4>
-          <ul>
-            <li>Registra tu restaurante</li>
-            <li>Registra tu tienda</li>
-            <li>Quiero ser repartidor</li>
-            <li>Haz crecer tu marca</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Sobre FitGo</h4>
-          <ul>
-            <li>Contacto</li>
-            <li>Términos y condiciones</li>
-            <li>Privacidad</li>
-            <li>Arequipa, Perú</li>
-          </ul>
+      <div class="hero-right">
+        <div class="hero-card">
+          <img src="./logo%20fondo%20oscuro.jpeg" alt="Logo FitGo portada">
         </div>
       </div>
 
-      <div class="footer-bottom">
-        © 2026 FitGo - Plataforma digital de delivery saludable en Arequipa
-      </div>
-    </footer>
-  </div>
+    </div>
+  </section>
 
-  <script>
-    const DELIVERY_COST = 5;
-    let carrito = [];
-    let currentQty = 1;
-    let selectedProduct = null;
-
-    const restaurants = [
-      {
-        id: 1,
-        name: "Punto Verde",
-        emoji: "🥗",
-        type: "restaurante",
-        category: "vegano",
-        eta: "35 min",
-        fee: "S/ 0.00",
-        rating: 4.8,
-        description: "Restaurante con opciones vegetarianas y comida saludable.",
-        tags: ["Vegano", "Ensaladas", "Saludable"],
-        products: [
-          {name:"Fitness Bowl", price:24, emoji:"🍚", description:"Bowl nutritivo con vegetales frescos, quinua y proteína ligera.", eta:"35 min"},
-          {name:"César Fit", price:26, emoji:"🥗", description:"Ensalada saludable estilo César con ingredientes frescos.", eta:"30 min"},
-          {name:"Wrap Verde", price:20, emoji:"🥙", description:"Wrap integral con vegetales y aderezo ligero.", eta:"28 min"}
-        ]
-      },
-      {
-        id: 2,
-        name: "Healthy Food",
-        emoji: "🍗",
-        type: "restaurante",
-        category: "proteina",
-        eta: "25 min",
-        fee: "S/ 0.00",
-        rating: 4.7,
-        description: "Comida saludable, bowls, jugos y asesoría nutricional en Arequipa.",
-        tags: ["Bowls", "Proteína", "Planes"],
-        products: [
-          {name:"Poke Bowl Fit", price:29, emoji:"🍚", description:"Bowl personalizado con base, toppings y proteína saludable.", eta:"25 min"},
-          {name:"Batido Proteico", price:14, emoji:"🥤", description:"Bebida alta en proteína ideal para después del entrenamiento.", eta:"15 min"},
-          {name:"Postre Saludable", price:12, emoji:"🍓", description:"Postre ligero elaborado con ingredientes más saludables.", eta:"18 min"}
-        ]
-      },
-      {
-        id: 3,
-        name: "Zum",
-        emoji: "🥤",
-        type: "restaurante",
-        category: "jugos",
-        eta: "20 min",
-        fee: "S/ 0.00",
-        rating: 4.9,
-        description: "Natural bowls and juices con delivery en Arequipa.",
-        tags: ["Jugos", "Bowls", "Natural"],
-        products: [
-          {name:"Buddha Bowl", price:22, emoji:"🍚", description:"Bowl natural con base integral, vegetales y semillas.", eta:"20 min"},
-          {name:"Smoothie Verde", price:13, emoji:"🥤", description:"Mezcla de frutas y vegetales con perfil refrescante y nutritivo.", eta:"15 min"},
-          {name:"Salad Bowl", price:19, emoji:"🥬", description:"Ensalada fresca con toppings variados y dressing ligero.", eta:"18 min"}
-        ]
-      },
-      {
-        id: 4,
-        name: "Organa",
-        emoji: "🛒",
-        type: "tienda",
-        category: "tienda",
-        eta: "30 min",
-        fee: "S/ 0.00",
-        rating: 4.6,
-        description: "Tienda saludable con productos orgánicos, veganos, snacks, proteínas y superfoods.",
-        tags: ["Tienda", "Orgánico", "Snacks"],
-        products: [
-          {name:"Snack Proteico", price:10, emoji:"🍫", description:"Snack fit para complementar una rutina saludable.", eta:"30 min"},
-          {name:"Granola Premium", price:18, emoji:"🥣", description:"Mezcla nutritiva ideal para desayunos o meriendas.", eta:"30 min"},
-          {name:"Superfood Pack", price:27, emoji:"🌾", description:"Selección de productos saludables y funcionales.", eta:"35 min"}
-        ]
-      }
-    ];
-
-    const mostSearched = [
-      {name:"Punto Verde", emoji:"🥗"},
-      {name:"Healthy Food", emoji:"🍗"},
-      {name:"Zum", emoji:"🥤"},
-      {name:"Organa", emoji:"🛒"}
-    ];
-
-    const overlay = document.getElementById("overlay");
-    const drawer = document.getElementById("drawer");
-    const checkoutDrawer = document.getElementById("checkoutDrawer");
-    const productModal = document.getElementById("productModal");
-
-    function toggleDrawer(show){
-      drawer.classList.toggle("show", show);
-      overlay.classList.toggle("show", show);
-    }
-
-    function toggleCheckout(show){
-      checkoutDrawer.classList.toggle("show", show);
-      overlay.classList.toggle("show", show);
-      if(show){
-        renderCheckout();
-      }
-    }
-
-    overlay.addEventListener("click", () => {
-      toggleDrawer(false);
-      toggleCheckout(false);
-      closeProductModal();
-    });
-
-    function closeProductModal(){
-      productModal.classList.remove("show");
-      overlay.classList.remove("show");
-    }
-
-    function simularLogin(){
-      alert("Ingreso simulado. Ahora puedes explorar restaurantes y productos saludables.");
-      irAResultados("todos");
-    }
-
-    function mostrarHome(){
-      document.getElementById("homeView").style.display = "block";
-      document.getElementById("resultadosView").classList.remove("active");
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-
-    function goTo(sectionId){
-      toggleDrawer(false);
-      if(sectionId === "resultados"){
-        irAResultados("todos");
-        return;
-      }
-      const el = document.getElementById(sectionId);
-      if(el){
-        if(sectionId === "join" || sectionId === "contacto"){
-          document.getElementById("homeView").style.display = "block";
-          document.getElementById("resultadosView").classList.remove("active");
-        }
-        setTimeout(() => {
-          el.scrollIntoView({behavior:"smooth"});
-        }, 100);
-      }
-    }
-
-    function pedirUbicacion(){
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(
-          function(){
-            document.getElementById("currentLocationText").textContent = "Ubicación actual";
-            alert("Ubicación detectada. Ahora te mostraremos opciones saludables cercanas.");
-            irAResultados("todos");
-          },
-          function(){
-            alert("No se pudo obtener la ubicación. Igual puedes seguir usando FitGo.");
-            irAResultados("todos");
-          }
-        );
-      } else {
-        alert("Tu navegador no permite ubicación automática.");
-        irAResultados("todos");
-      }
-    }
-
-    function buscarGeneral(){
-      const q = document.getElementById("mainSearch").value.trim().toLowerCase();
-      if(!q){
-        irAResultados("todos");
-        return;
-      }
-      irAResultados(q);
-    }
-
-    function irAResultados(filtro){
-      document.getElementById("homeView").style.display = "none";
-      document.getElementById("resultadosView").classList.add("active");
-
-      const title = document.getElementById("resultsTitle");
-      title.textContent = filtro === "todos" ? "Top resultados saludables en Arequipa" : `Top resultados para "${filtro}"`;
-
-      renderMostSearched();
-      renderRestaurants(filtro);
-
-      setTimeout(() => {
-        document.getElementById("resultadosView").scrollIntoView({behavior:"smooth"});
-      }, 120);
-    }
-
-    function filtrarCategoria(cat){
-      irAResultados(cat);
-      toggleDrawer(false);
-    }
-
-    function renderMostSearched(){
-      const box = document.getElementById("mostSearchedList");
-      box.innerHTML = mostSearched.map(item => `
-        <div class="mini-rest" onclick="irAResultados('${item.name.toLowerCase()}')">
-          <div class="mini-logo">${item.emoji}</div>
-          <div>${item.name}</div>
-        </div>
-      `).join("");
-    }
-
-    function renderRestaurants(filtro){
-      const box = document.getElementById("restaurantList");
-      const search = (filtro || "todos").toLowerCase();
-
-      const filtered = restaurants.filter(r => {
-        if(search === "todos") return true;
-        return (
-          r.name.toLowerCase().includes(search) ||
-          r.category.toLowerCase().includes(search) ||
-          r.type.toLowerCase().includes(search) ||
-          r.tags.some(t => t.toLowerCase().includes(search)) ||
-          r.products.some(p => p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search))
-        );
-      });
-
-      if(filtered.length === 0){
-        box.innerHTML = `
-          <div class="rest-card">
-            <h3>No encontramos resultados exactos</h3>
-            <p style="color:#666; margin-top:10px;">Prueba con términos como: vegano, bowls, ensaladas, jugos, proteína o tiendas.</p>
-          </div>
-        `;
-        return;
-      }
-
-      box.innerHTML = filtered.map(r => `
-        <div class="rest-card">
-          <div class="rest-header">
-            <div class="rest-title">
-              <div class="rest-avatar">${r.emoji}</div>
-              <div>
-                <h3>${r.name}</h3>
-                <div class="rest-meta">
-                  <span>⏱ ${r.eta}</span>
-                  <span>🛵 ${r.fee}</span>
-                  <span>⭐ ${r.rating}</span>
-                  <span class="delivery-pill">Envío saludable</span>
-                </div>
-              </div>
-            </div>
-            <button class="go-store" onclick="scrollToRestaurant('${r.id}')">Ir a la tienda</button>
-          </div>
-
-          <div class="dish-grid" id="restaurant-${r.id}">
-            ${r.products.map(p => `
-              <div class="dish-card">
-                <div class="dish-left" onclick='openProductModal(${JSON.stringify({
-                  restaurant: r.name,
-                  name: p.name,
-                  price: p.price,
-                  emoji: p.emoji,
-                  description: p.description,
-                  eta: p.eta
-                })})' style="cursor:pointer;">
-                  <div class="dish-img">${p.emoji}</div>
-                  <div class="dish-info">
-                    <h4>${p.name}</h4>
-                    <p>${p.description}</p>
-                    <strong>S/ ${p.price.toFixed(2)}</strong>
-                  </div>
-                </div>
-                <button class="plus-btn" onclick='quickAdd(${JSON.stringify({
-                  restaurant: r.name,
-                  name: p.name,
-                  price: p.price,
-                  emoji: p.emoji,
-                  description: p.description,
-                  eta: p.eta
-                })})'>+</button>
-              </div>
-            `).join("")}
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function scrollToRestaurant(id){
-      const el = document.getElementById(`restaurant-${id}`);
-      if(el){
-        el.scrollIntoView({behavior:"smooth", block:"center"});
-      }
-    }
-
-    function openProductModal(product){
-      selectedProduct = product;
-      currentQty = 1;
-      document.getElementById("modalProductName").textContent = product.name;
-      document.getElementById("modalProductEmoji").textContent = product.emoji;
-      document.getElementById("modalPrice").textContent = `S/ ${product.price.toFixed(2)}`;
-      document.getElementById("modalDescription").textContent = product.description;
-      document.getElementById("modalEta").textContent = product.eta;
-      document.getElementById("qtyValue").textContent = currentQty;
-
-      productModal.classList.add("show");
-      overlay.classList.add("show");
-    }
-
-    function changeQty(delta){
-      currentQty += delta;
-      if(currentQty < 1) currentQty = 1;
-      document.getElementById("qtyValue").textContent = currentQty;
-    }
-
-    function agregarModalAlCarrito(){
-      if(!selectedProduct) return;
-      for(let i = 0; i < currentQty; i++){
-        carrito.push({...selectedProduct});
-      }
-      updateCartCount();
-      closeProductModal();
-      toggleCheckout(true);
-    }
-
-    function quickAdd(product){
-      carrito.push({...product});
-      updateCartCount();
-      toggleCheckout(true);
-    }
-
-    function updateCartCount(){
-      document.getElementById("cartCount").textContent = carrito.length;
-    }
-
-    function renderCheckout(){
-      const list = document.getElementById("checkoutItems");
-      const subtotalEl = document.getElementById("sumSubtotal");
-      const totalEl = document.getElementById("sumTotal");
-
-      if(carrito.length === 0){
-        list.innerHTML = "<li>No hay productos en el carrito.</li>";
-        subtotalEl.textContent = "0.00";
-        totalEl.textContent = DELIVERY_COST.toFixed(2);
-        return;
-      }
-
-      list.innerHTML = carrito.map((item, i) => `
-        <li>
-          <span>${item.name}</span>
-          <span>S/ ${item.price.toFixed(2)}</span>
-        </li>
-      `).join("");
-
-      const subtotal = carrito.reduce((acc, item) => acc + item.price, 0);
-      subtotalEl.textContent = subtotal.toFixed(2);
-      totalEl.textContent = (subtotal + DELIVERY_COST).toFixed(2);
-    }
-
-    function confirmarPedido(){
-      const direccion = document.getElementById("direccionEntrega").value.trim();
-      const metodo = document.getElementById("metodoPago").value;
-
-      if(carrito.length === 0){
-        alert("Tu carrito está vacío.");
-        return;
-      }
-      if(!direccion){
-        alert("Por favor, ingresa la dirección de entrega.");
-        return;
-      }
-      if(!metodo){
-        alert("Selecciona un método de pago.");
-        return;
-      }
-
-      alert("Pedido confirmado en FitGo. Tu compra saludable ha sido registrada.");
-      carrito = [];
-      updateCartCount();
-      renderCheckout();
-      toggleCheckout(false);
-    }
-
-    // inicio
-    renderMostSearched();
-    updateCartCount();
-  </script>
 </body>
 </html>
