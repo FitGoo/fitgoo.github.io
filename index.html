@@ -680,7 +680,8 @@ background:#25d366;color:#fff;border-radius:999px;padding:16px 18px;box-shadow:v
   <img src="gps_casa.png" alt="gps" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">
   <span id="cartAddressLabel">Agrega o escoge una dirección</span>
 </span> <span id="cartAddressLabel">Agrega o escoge una dirección</span></span>
-<span>▾</span>
+<span>
+<span>▾</span>" y el nombre de la imagen es gps_casa.png
 </div>
 <div class="cart-body" id="cartBody"></div>
 <div class="cart-footer" id="cartFooter"></div>
@@ -700,7 +701,10 @@ background:#25d366;color:#fff;border-radius:999px;padding:16px 18px;box-shadow:v
 </div>
 </div>
 
-<button class="location-pill" onclick="openAddressSelect()">📍 <span id="currentCityText">Arequipa</span></button>
+<button class="location-pill" onclick="openAddressSelect()">
+  <img src="gps_casa.png" alt="gps" class="icon-gps">
+  <span id="currentCityText">Arequipa</span>
+</button>
 
 <div class="search-bar">
 <span>🥬</span>
@@ -1282,11 +1286,16 @@ background:#25d366;color:#fff;border-radius:999px;padding:16px 18px;box-shadow:v
 </div>
 <div class="modal-body">
 <div class="search-line">
-<span>📍</span>
+<span>
+  <img src="gps_cass.png" alt="gps" class="icon-gps">
+</span>
 <input id="addressSearchInput" placeholder="Escribe la dirección de entrega">
 </div>
 <div class="address-list" id="addressList"></div>
-<button class="gps-link" onclick="askForCurrentLocation()">📍 Usar mi ubicación actual</button>
+<button class="gps-link" onclick="askForCurrentLocation()">
+  <img src="gp_cas.png" alt="gps" class="icon-gps">
+  Usar mi ubicación actual
+</button>
 </div>
 </section>
 <!-- MAP MODAL -->
