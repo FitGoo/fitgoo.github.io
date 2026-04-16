@@ -676,7 +676,10 @@ background:#25d366;color:#fff;border-radius:999px;padding:16px 18px;box-shadow:v
 <button class="close-btn" onclick="toggleCart(false)">✕</button>
 </div>
 <div class="cart-address" onclick="openAddressSelect()">
-<span>📍 <span id="cartAddressLabel">Agrega o escoge una dirección</span></span>
+<span>
+  <img src="gps_casa.png" alt="gps" style="width:16px; height:16px; vertical-align:middle; margin-right:5px;">
+  <span id="cartAddressLabel">Agrega o escoge una dirección</span>
+</span> <span id="cartAddressLabel">Agrega o escoge una dirección</span></span>
 <span>▾</span>
 </div>
 <div class="cart-body" id="cartBody"></div>
@@ -1484,7 +1487,6 @@ const quickFilters = ['Promos', '+ 4.5', '35 mins', '¡Nuevos!'];
 const restaurantCategories = [
 {name:'Sushi', icon:'🍣'},
 {name:'Poke', icon:'🥗'},
-{name:'Postres', icon:'🍰'},
 {name:'Saludable', icon:'🥬'},
 {name:'Café', icon:'☕'},
 {name:'Jugos y Batidos', icon:'🥤'},
