@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-label="Farmacia y suplementos">
+  <defs>
+    <linearGradient id="bg" x1="90" x2="810" y1="500" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#dff5e8"/>
+      <stop offset=".58" stop-color="#f5fff9"/>
+      <stop offset="1" stop-color="#fff4e8"/>
+    </linearGradient>
+    <linearGradient id="bottle" x1="386" x2="564" y1="130" y2="458" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#117e70"/>
+      <stop offset="1" stop-color="#25c878"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="560" rx="42" fill="url(#bg)"/>
+  <ellipse cx="456" cy="476" rx="278" ry="34" fill="#0d4f49" opacity=".12"/>
+  <rect x="330" y="128" width="240" height="324" rx="46" fill="url(#bottle)"/>
+  <rect x="372" y="84" width="156" height="72" rx="26" fill="#0d4f49"/>
+  <rect x="354" y="222" width="192" height="126" rx="24" fill="#fff"/>
+  <rect x="430" y="244" width="40" height="82" rx="9" fill="#ff7a1a"/>
+  <rect x="409" y="265" width="82" height="40" rx="9" fill="#ff7a1a"/>
+  <path d="M256 304c-62 0-112 42-112 94h224c0-52-50-94-112-94z" fill="#fff"/>
+  <rect x="158" y="372" width="196" height="70" rx="18" fill="#ff7a1a"/>
+  <path d="M182 405h148" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+  <path d="M620 278c74 0 134 52 134 116H486c0-64 60-116 134-116z" fill="#fff"/>
+  <rect x="512" y="356" width="216" height="78" rx="20" fill="#1f8a70"/>
+  <path d="M548 395h142" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="676" cy="138" r="46" fill="#ff8a1e"/>
+  <circle cx="716" cy="190" r="26" fill="#25c878"/>
+  <circle cx="218" cy="170" r="34" fill="#25c878"/>
+</svg>

@@ -1425,10 +1425,11 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: #fff;
-      padding: 16px;
+      padding: 20px;
+      min-height: 360px;
     }
     .qr-box img {
-      width: min(260px, 100%);
+      width: min(360px, 100%);
       height: auto;
       object-fit: contain;
     }
@@ -2948,6 +2949,7 @@
 
     function protectImages(scope = document) {
       scope.querySelectorAll("img").forEach((img) => {
+        if (img.dataset.keepErrorHandler === "true") return;
         img.loading = img.loading || "lazy";
         img.decoding = img.decoding || "async";
         img.onerror = () => {
@@ -3648,7 +3650,7 @@
       const { total } = cartTotals();
       $("#paymentTitle").textContent = method;
       const qrBlock = (method === "Yape" || method === "Plin") ? `
-        <div class="qr-box"><img src="assets/ui/qr-demo.svg" alt="QR ${method}"></div>
+        <div class="qr-box"><img src="assets/ui/qr-pago.png" alt="QR ${method}" data-keep-error-handler="true" onerror="this.onerror=null;this.src='assets/ui/qr-demo.svg'"></div>
         <p class="payment-note">Escanea este QR y deposita exactamente <strong>${money(total)}</strong>. Para procesar el pago debes ingresar tus datos y el codigo de operacion.</p>
         <input class="field" data-required="true" data-pay-field="phone" inputmode="numeric" placeholder="Numero ${method}">
         <input class="field" data-required="true" data-pay-field="operation" placeholder="Codigo de operacion">
